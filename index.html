@@ -6,58 +6,41 @@
 
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://unpkg.com/@pdf-lib/fontkit@1.1.1/dist/fontkit.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fontaine7/arabic-reshaper-js@master/arabic-reshaper.js"></script>
 
     <style>
-        body { font-family: 'Tahoma', sans-serif; background: #f3f6fb; text-align: center; color: #333; }
-        .container { max-width: 800px; margin: 50px auto; padding: 25px; background: white; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        body { font-family: 'Tahoma', sans-serif; background: #f3f6fb; text-align: center; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: auto; padding: 30px; background: white; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .hidden { display: none; }
         button { padding: 12px 25px; margin: 10px; border-radius: 8px; border: none; cursor: pointer; background: #1976d2; color: #fff; font-size: 16px; transition: 0.3s; }
         button:hover { background: #1565c0; }
         button:disabled { background: #999; cursor: not-allowed; }
-        .execute-btn { margin-top: 20px; font-size: 22px; background: linear-gradient(145deg, #43a047, #2e7d32); box-shadow: 0 4px #1b5e20; width: 80%; }
-        .execute-btn:active { box-shadow: 0 2px #1b5e20; transform: translateY(2px); }
-        input { display: block; width: 80%; margin: 15px auto; padding: 12px; border-radius: 8px; border: 1px solid #ddd; font-size: 16px; }
-        h2, h3 { color: #1976d2; }
+        .execute-btn { margin-top: 20px; font-size: 22px; background: linear-gradient(145deg, #43a047, #2e7d32); box-shadow: 0 4px #1b5e20; width: 90%; }
+        input { display: block; width: 85%; margin: 15px auto; padding: 12px; border-radius: 8px; border: 1px solid #ddd; font-size: 16px; text-align: center; }
+        h2 { color: #1976d2; }
     </style>
 </head>
 
 <body>
 <div class="container">
-
     <section id="mainSection">
         <h2>هل أنت منسق ساعة برمجة؟</h2>
-        <button onclick="showCoordinator()">نعم</button>
-        <button onclick="showTeacher()">لا</button>
-
+        <button onclick="showSection('coordinatorLink')">نعم</button>
+        <button onclick="showSection('teacherSection')">لا</button>
         <div id="coordinatorLink" class="hidden">
-            <br>
-            <a href="https://example.com" target="_blank" style="color: #d32f2f; text-decoration: none; font-weight: bold;">
-                📍 تسجيل المدارس على خارطة الفعالية
-            </a>
+            <br><a href="https://example.com" target="_blank" style="color: #d32f2f; font-weight: bold;">📍 تسجيل المدارس على الخارطة</a>
         </div>
     </section>
 
     <section id="teacherSection" class="hidden">
         <h2>مرحبًا بك أيها المعلم</h2>
-        <p>فضلاً اختر المسار</p>
-        <button onclick="showStages()">المعلم المبتكر</button>
+        <button onclick="showSection('stages')">المعلم المبتكر</button>
     </section>
 
-    <section id="stages" class="hidden">
-        <button onclick="showGrades()">ابتدائي</button>
-    </section>
-
-    <section id="grades" class="hidden">
-        <button onclick="showSubjects()">الصف الخامس</button>
-    </section>
-
-    <section id="subjects" class="hidden">
-        <button onclick="showLesson()">العلوم</button>
-    </section>
-
-    <section id="lesson" class="hidden">
-        <button onclick="showForm()">دورة الماء في الطبيعة</button>
-    </section>
+    <section id="stages" class="hidden"><button onclick="showSection('grades')">ابتدائي</button></section>
+    <section id="grades" class="hidden"><button onclick="showSection('subjects')">الصف الخامس</button></section>
+    <section id="subjects" class="hidden"><button onclick="showSection('lesson')">العلوم</button></section>
+    <section id="lesson" class="hidden"><button onclick="showSection('formSection')">دورة الماء في الطبيعة</button></section>
 
     <section id="formSection" class="hidden">
         <h3>بيانات التنفيذ</h3>
@@ -66,20 +49,23 @@
         <input id="school" placeholder="اسم المدرسة">
         <button class="execute-btn" onclick="generatePDF()">نفّذ واستخرج الشهادة</button>
     </section>
-
 </div>
 
 <script>
     let used = false;
 
-    // وظائف التنقل (بسيطة ومنظمة)
-    function showCoordinator(){ document.getElementById("coordinatorLink").classList.toggle("hidden"); }
-    function showTeacher(){ document.getElementById("teacherSection").classList.remove("hidden"); }
-    function showStages(){ document.getElementById("stages").classList.remove("hidden"); }
-    function showGrades(){ document.getElementById("grades").classList.remove("hidden"); }
-    function showSubjects(){ document.getElementById("subjects").classList.remove("hidden"); }
-    function showLesson(){ document.getElementById("lesson").classList.remove("hidden"); }
-    function showForm(){ document.getElementById("formSection").classList.remove("hidden"); }
+    function showSection(id) {
+        document.getElementById(id).classList.remove("hidden");
+    }
+
+    // وظيفة لعكس النصوص العربية لتظهر بشكل صحيح (RTL)
+    function processArabicText(text) {
+        if (!text) return "";
+        // تشبيك الحروف
+        const reshaped = ArabicReshaper.reshape(text);
+        // عكس الترتيب ليناسب طريقة رسم المكتبة
+        return reshaped.split('').reverse().join('');
+    }
 
     async function generatePDF() {
         if (used) return alert("⚠️ تم تنفيذ هذا النموذج مسبقًا");
@@ -93,33 +79,31 @@
         try {
             const { PDFDocument, rgb } = PDFLib;
 
-            // 1. تحميل القالب (تأكد من وجود الملف في نفس المجلد)
+            // 1. تحميل القالب
             const templateBytes = await fetch("pro Teacher.pdf").then(res => {
-                if(!res.ok) throw new Error("لم يتم العثور على ملف القالب pro Teacher.pdf");
+                if (!res.ok) throw new Error("لم يتم العثور على ملف القالب PDF");
                 return res.arrayBuffer();
             });
-
             const pdfDoc = await PDFDocument.load(templateBytes);
-            
-            // 2. تفعيل خاصية الخطوط الخارجية لدعم العربية
             pdfDoc.registerFontkit(fontkit);
             
-            // ملاحظة هامة: يجب توفير رابط لخط يدعم العربية (مثل Cairo أو Tajawal)
-            const fontUrl = 'https://fonts.gstatic.com/s/cairo/v20/SLXGc1nuq4S_ZNH8Cekd.ttf';
-            const fontBytes = await fetch(fontUrl).then(res => res.arrayBuffer());
+            // 2. تحميل الخط بصيغة TTF مباشرة من مصدر موثوق
+            const fontUrl = 'https://cdn.jsdelivr.net/gh/googlefonts/cairo@main/fonts/ttf/Cairo-Medium.ttf';
+            const fontBytes = await fetch(fontUrl).then(res => {
+                if (!res.ok) throw new Error("فشل تحميل الخط العربي");
+                return res.arrayBuffer();
+            });
             const arabicFont = await pdfDoc.embedFont(fontBytes);
 
-            const pages = pdfDoc.getPages();
-            const firstPage = pages[0];
+            const page = pdfDoc.getPages()[0];
 
-            // 3. الكتابة على الـ PDF (الإحداثيات قد تحتاج تعديل بسيط حسب قالبك)
-            // ملاحظة: الخطوط العربية تحتاج أحياناً لترتيب الحروف بشكل عكسي إذا لم تكن المكتبة تدعم التشكيل التلقائي
-            
-            firstPage.drawText(platform, { x: 300, y: 470, size: 18, font: arabicFont, color: rgb(0, 0, 0) });
-            firstPage.drawText(name, { x: 300, y: 430, size: 18, font: arabicFont, color: rgb(0, 0, 0) });
-            firstPage.drawText(school, { x: 300, y: 390, size: 18, font: arabicFont, color: rgb(0, 0, 0) });
+            // 3. كتابة النصوص مع معالجتها للعربية
+            // ملاحظة: قد تحتاج لتعديل قيم x و y لتناسب مكان السطور في قالبك
+            page.drawText(processArabicText(platform), { x: 450, y: 470, size: 16, font: arabicFont });
+            page.drawText(processArabicText(name),     { x: 450, y: 430, size: 16, font: arabicFont });
+            page.drawText(processArabicText(school),   { x: 450, y: 390, size: 16, font: arabicFont });
 
-            // 4. حفظ وتحميل الملف
+            // 4. الحفظ والتحميل
             const pdfBytes = await pdfDoc.save();
             const blob = new Blob([pdfBytes], { type: "application/pdf" });
             const link = document.createElement("a");
@@ -127,11 +111,9 @@
             link.download = `شهادة_${name}.pdf`;
             link.click();
 
-            // تعطيل الزر بعد التنفيذ
             used = true;
-            const btn = document.querySelector(".execute-btn");
-            btn.disabled = true;
-            btn.innerText = "تم التنفيذ ✅";
+            document.querySelector(".execute-btn").innerText = "تم التنفيذ ✅";
+            document.querySelector(".execute-btn").disabled = true;
 
         } catch (e) {
             console.error(e);
