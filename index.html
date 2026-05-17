@@ -1,139 +1,102 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مبادرة مدرستي تزدهر - الأسبوع الثالث عشر</title>
     <style>
         body {
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            text-align: center;
         }
-
-        h1, h2, h3 {
-            font-family: 'Cairo', sans-serif;
-            font-weight: 700;
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        .chart-box {
+            margin: 20px auto;
+            padding: 15px;
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            max-width: 100%;
+        }
+        .chart-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        .nav-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #34495e;
+        }
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #fff;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .btn-first { background-color: #34495e; }
+        .btn-first:hover { background-color: #2c3e50; }
+        .btn-second { background-color: #2980b9; }
+        .btn-second:hover { background-color: #216a94; }
+        .btn-third { background-color: #8e44ad; }
+        .btn-third:hover { background-color: #732691; }
     </style>
 </head>
-    <meta charset="UTF-8">
-    <title>منصة المعلم المبتكر</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
-    <script src="https://unpkg.com/@pdf-lib/fontkit@1.1.1/dist/fontkit.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/fontaine7/arabic-reshaper-js@master/arabic-reshaper.js"></script>
-
-    <style>
-        body { font-family: 'Tahoma', sans-serif; background: #f3f6fb; text-align: center; color: #333; margin: 0; padding: 20px; }
-        .container { max-width: 800px; margin: auto; padding: 30px; background: white; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        .hidden { display: none; }
-        button { padding: 12px 25px; margin: 10px; border-radius: 8px; border: none; cursor: pointer; background: #1976d2; color: #fff; font-size: 16px; transition: 0.3s; }
-        button:hover { background: #1565c0; }
-        button:disabled { background: #999; cursor: not-allowed; }
-        .execute-btn { margin-top: 20px; font-size: 22px; background: linear-gradient(145deg, #43a047, #2e7d32); box-shadow: 0 4px #1b5e20; width: 90%; }
-        input { display: block; width: 85%; margin: 15px auto; padding: 12px; border-radius: 8px; border: 1px solid #ddd; font-size: 16px; text-align: center; }
-        h2 { color: #1976d2; }
-    </style>
-</head>
-
 <body>
+
 <div class="container">
-    <section id="mainSection">
-        <h2>هل أنت منسق ساعة برمجة؟</h2>
-        <button onclick="showSection('coordinatorLink')">نعم</button>
-        <button onclick="showSection('teacherSection')">لا</button>
-        <div id="coordinatorLink" class="hidden">
-            <br><a href="https://example.com" target="_blank" style="color: #d32f2f; font-weight: bold;">📍 تسجيل المدارس على الخارطة</a>
-        </div>
-    </section>
+    <h1>بيانات الأسبوع الثالث عشر - المقارنة العامة</h1>
+    <div class="subtitle">مبادرة مدرستي تزدهر: سباق محموم بين فصول المرحلة المتوسطة</div>
+    
+    <div class="chart-box">
+        <!-- هنا يظهر الرسم البياني المجمع الثنائي الأبعاد -->
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80" alt="الرسم البياني المجمع للأسبوع الثالث عشر">
+        <p style="font-size: 12px; color: #7f8c8d; margin-top: 8px;">(مخطط توضيحي للرسم البياني المجمع والشامل للصفوف الثلاثة)</p>
+    </div>
 
-    <section id="teacherSection" class="hidden">
-        <h2>مرحبًا بك أيها المعلم</h2>
-        <button onclick="showSection('stages')">المعلم المبتكر</button>
-    </section>
-
-    <section id="stages" class="hidden"><button onclick="showSection('grades')">ابتدائي</button></section>
-    <section id="grades" class="hidden"><button onclick="showSection('subjects')">الصف الخامس</button></section>
-    <section id="subjects" class="hidden"><button onclick="showSection('lesson')">العلوم</button></section>
-    <section id="lesson" class="hidden"><button onclick="showSection('formSection')">دورة الماء في الطبيعة</button></section>
-
-    <section id="formSection" class="hidden">
-        <h3>بيانات التنفيذ</h3>
-        <input id="platform" placeholder="حساب منصة مدرستي">
-        <input id="name" placeholder="الاسم الرباعي">
-        <input id="school" placeholder="اسم المدرسة">
-        <button class="execute-btn" onclick="generatePDF()">نفّذ واستخرج الشهادة</button>
-    </section>
+    <div class="nav-title">اضغط على أحد الصفوف التالية للاطلاع على تقريره التفصيلي ولوحة النجوم:</div>
+    
+    <div class="button-group">
+        <a href="first.html" class="btn btn-first">الصف الأول المتوسط</a>
+        <a href="second.html" class="btn btn-second">الصف الثاني المتوسط</a>
+        <a href="third.html" class="btn btn-third">الصف الثالث المتوسط</a>
+    </div>
 </div>
 
-<script>
-    let used = false;
-
-    function showSection(id) {
-        document.getElementById(id).classList.remove("hidden");
-    }
-
-    // وظيفة لعكس النصوص العربية لتظهر بشكل صحيح (RTL)
-    function processArabicText(text) {
-        if (!text) return "";
-        // تشبيك الحروف
-        const reshaped = ArabicReshaper.reshape(text);
-        // عكس الترتيب ليناسب طريقة رسم المكتبة
-        return reshaped.split('').reverse().join('');
-    }
-
-    async function generatePDF() {
-        if (used) return alert("⚠️ تم تنفيذ هذا النموذج مسبقًا");
-
-        const platform = document.getElementById("platform").value.trim();
-        const name = document.getElementById("name").value.trim();
-        const school = document.getElementById("school").value.trim();
-
-        if (!platform || !name || !school) return alert("يرجى تعبئة جميع الحقول");
-
-        try {
-            const { PDFDocument, rgb } = PDFLib;
-
-            // 1. تحميل القالب
-            const templateBytes = await fetch("pro Teacher.pdf").then(res => {
-                if (!res.ok) throw new Error("لم يتم العثور على ملف القالب PDF");
-                return res.arrayBuffer();
-            });
-            const pdfDoc = await PDFDocument.load(templateBytes);
-            pdfDoc.registerFontkit(fontkit);
-            
-            // 2. تحميل الخط بصيغة TTF مباشرة من مصدر موثوق
-            const fontUrl = 'https://cdn.jsdelivr.net/gh/googlefonts/cairo@main/fonts/ttf/Cairo-Medium.ttf';
-            const fontBytes = await fetch(fontUrl).then(res => {
-                if (!res.ok) throw new Error("فشل تحميل الخط العربي");
-                return res.arrayBuffer();
-            });
-            const arabicFont = await pdfDoc.embedFont(fontBytes);
-
-            const page = pdfDoc.getPages()[0];
-
-            // 3. كتابة النصوص مع معالجتها للعربية
-            // ملاحظة: قد تحتاج لتعديل قيم x و y لتناسب مكان السطور في قالبك
-            page.drawText(processArabicText(platform), { x: 450, y: 470, size: 16, font: arabicFont });
-            page.drawText(processArabicText(name),     { x: 450, y: 430, size: 16, font: arabicFont });
-            page.drawText(processArabicText(school),   { x: 450, y: 390, size: 16, font: arabicFont });
-
-            // 4. الحفظ والتحميل
-            const pdfBytes = await pdfDoc.save();
-            const blob = new Blob([pdfBytes], { type: "application/pdf" });
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.download = `شهادة_${name}.pdf`;
-            link.click();
-
-            used = true;
-            document.querySelector(".execute-btn").innerText = "تم التنفيذ ✅";
-            document.querySelector(".execute-btn").disabled = true;
-
-        } catch (e) {
-            console.error(e);
-            alert("❌ خطأ: " + e.message);
-        }
-    }
-</script>
 </body>
 </html>
